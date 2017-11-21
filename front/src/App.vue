@@ -5,17 +5,21 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+import 'muse-ui/dist/theme-teal.css' // 使用 carbon 主题
+
+
+Vue.use(MuseUI)
+
+import ReadHeader from '@/components/header/Header'
+import ReadFooter from '@/components/footer/Footer'
+
 export default {
   name: 'app'
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 </style>
