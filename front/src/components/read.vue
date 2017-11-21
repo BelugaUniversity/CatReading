@@ -42,15 +42,19 @@
     </div>
     <div class="footer">
       <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
-        <div>
-          <span class="fontReduce">调整字体大小: {{progrssVal}}</span>
-          <mu-slider v-model="progrssVal" :step="1" class="demo-slider"/>
+        <div :style="showSet">
+          <span class="fontReduce">调整字体大小: {{fontVal}}</span>
+          <mu-slider v-model="fontVal" :step="1" class="demo-slider" :max="20" :min="10"/>
           <div class="adjustColor">
             <mu-raised-button class="demo-raised-button adjustColBUto" backgroundColor="rgb(222,206,169)"/>
             <mu-raised-button class="demo-raised-button adjustColBUto" backgroundColor="rgb(202,217,232)"/>
             <mu-raised-button class="demo-raised-button adjustColBUto" backgroundColor="rgb(209,237,209)"/>
             <mu-raised-button class="demo-raised-button adjustColBUto" backgroundColor="rgb(230,230,230)"/>
           </div>
+        </div>
+        <div :style="showPro">
+          <span class="fontReduce">进度: {{progressVal}}%</span>
+          <mu-slider v-model="nowCharpternum" :step="1" class="demo-slider" :max="charpterNumber" disabled/>
         </div>
         <mu-bottom-nav :value="bottomNav" @change="handleChange">
           <mu-bottom-nav-item value="catalog" title="目录" icon="format_list_bulleted" class="bottomNavIcon"/>
@@ -77,7 +81,12 @@ export default {
       bottomSheet: false,
       bottomNav: '',
       catalogOpen: false,
-      progrssVal: 10
+      progressVal: '',
+      fontVal: 10,
+      charpterNumber: 100,
+      nowCharpternum: 20,
+      showSet: 'display:none;',
+      showPro: 'display:none'
     }
   },
   methods: {
@@ -88,10 +97,12 @@ export default {
       //关闭底部栏
       this.bottomSheet = false
       this.bottomNav = ''
+      this.showPro = 'display:none'
     },
     openBottomSheet () {
       //打开底部栏
       this.bottomSheet = true
+      this.progressVal = (this.nowCharpternum / this.charpterNumber) * 100
     },
     handleChange (val) {
       //选择底部栏操作处理
@@ -99,6 +110,17 @@ export default {
       if(val == "catalog"){
         this.catalogOpen = true
         this.bottomSheet = false
+        this.showPro = 'display:none'
+        this.showSet = 'display:none'
+      }
+      if(val == "progrss"){
+        //进度栏
+        this.showPro = 'display:block'
+        this.showSet = 'display:none'
+      }
+      if(val == "setting"){
+        this.showSet = 'display:block'
+        this.showPro = 'display:none'
       }
     },
     catalogToggle () {
