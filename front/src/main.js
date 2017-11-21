@@ -3,11 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import MuseUI from 'muse-ui'
-import 'muse-ui/dist/muse-ui.css'
-import 'muse-ui/dist/theme-teal.css'
-Vue.use(MuseUI)
+import axios from 'axios'
+
+
 Vue.config.productionTip = false
+
+window.axios = axios;
+axios.defaults.baseURL = 'http://www.3roo.cn';
+axios.defaults.autofaceURL = 'http://www.3roo.cn';
 
 /* eslint-disable no-new */
 new Vue({
